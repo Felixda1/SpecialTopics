@@ -40,7 +40,7 @@ postgresql:
     - POSTGRES_DB=gitlabhq_production
 # the following are hints on what volumes to mount if you want to persist data
   volumes:
-    - data/postgresql:$dval:rw
+    - $dval:/var/lib/postgresql:rw
 
 redis:
   restart: always

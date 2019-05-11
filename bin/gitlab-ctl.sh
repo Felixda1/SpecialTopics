@@ -1,38 +1,33 @@
+#!/usr/bin/env bash
 pflag=
 dflag=
 dval=/tmp/gitlab-data
 pval=8081
-comm=
+COMM=
 
 
-while getopts hpd: name
+while getopts hp:d: name
 do
     case $name in
     p)    pflag=1
-          pval="$POPTARG";;
+          pval="$OPTARG";;
     d)    dflag=1
-          dval="$DOPTARG";;
+          dval="$OPTARG";;
     h)   printf "Usage: %s: [-p port] [-d directory] args\n" $0
           exit 0;;
     esac
 done
 
-if [ ! -z "$pflag" ]; then
-    printf 'Option -p specified\n' "$pval"
-fi
-if [ ! -z "$dflag" ]; then
-    printf 'Option -d specified\n' "$dval"
-fi
 shift $(($OPTIND - 1))
 
-comm = "$1"
+COMM="$1"
 
-if [ "$comm" = "start" ]; then
-    comm = "up"
-elif [ "$comm" = "stop" ]; then
-    comm = "stop"
-elif [ "$comm" = "destory" ]; then
-    comm = "rm"
+if [ "$COMM" = "start" ]; then
+    COMM="up -d"
+elif [ "$COMM" = "stop" ]; then
+    COMM="stop"
+elif [ "$COMM" = "destroy" ]; then
+    COMM="rm"
 fi
 
 
@@ -40,4 +35,4 @@ fi
 export pval
 export dval
 
-docker-compose "$comm"
+docker-compose $COMM
