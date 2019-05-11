@@ -26,7 +26,7 @@ if [ "$COMM" = "start" ]; then
     COMM="up -d"
 elif [ "$COMM" = "stop" ]; then
     COMM="stop"
-elif [ "$COMM" = "destroy" ]; then
+elif [ "$COMM" = "down" ]; then
     COMM="rm"
 fi
 
